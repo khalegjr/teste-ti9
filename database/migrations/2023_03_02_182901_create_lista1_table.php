@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('lista1', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Cliente::class, 'id');
-            $table->foreignIdFor(Produto::class, 'id');
+            $table->foreignIdFor(Cliente::class, 'cliente_id');
+            $table->foreignIdFor(Produto::class, 'produto_id');
         });
     }
 
