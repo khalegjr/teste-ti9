@@ -14,7 +14,7 @@ class Produto extends Model
      *
      * @var string
      */
-    protected $table = 'cliente';
+    protected $table = 'produto';
 
     /**
      * Indicates if the model should be timestamped.
