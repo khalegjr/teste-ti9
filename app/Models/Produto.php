@@ -22,4 +22,9 @@ class Produto extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public function clientes()
+    {
+        return $this->belongsToMany(Cliente::class, 'lista1');
+    }
 }
