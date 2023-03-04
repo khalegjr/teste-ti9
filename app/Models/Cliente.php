@@ -23,7 +23,7 @@ class Cliente extends Model
      */
     public $timestamps = false;
 
-    public function products()
+    public function produtos()
     {
         return $this->belongsToMany(Produto::class, 'lista1');
     }

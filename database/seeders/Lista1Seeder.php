@@ -17,19 +17,19 @@ class Lista1Seeder extends Seeder
 
         $csvFile = fopen(base_path("database/data/lista-produtos-escolhidos-ti9.csv"), "r");
 
-        $firstline = true;
+        $firstLine = true;
 
         while (($data = fgetcsv($csvFile, 2000, ";")) !== false) {
-            if (!$firstline) {
+            if (!$firstLine) {
                 foreach ($clientes as $cliente) {
                     if ($cliente->id == $data['0']) {
-                        $cliente->products()->attach([$data['1']]);
+                        $cliente->produtos()->attach([$data['1']]);
                     }
                 }
                 // para cada cliente, enquanto id = cliente_id
                 // sync com a tabela
             }
-            $firstline = false;
+            $firstLine = false;
         }
 
         fclose($csvFile);
