@@ -40,17 +40,14 @@ class ClienteController extends Controller
             ->route('pedidos.lista')
             ->with('success', 'Pedido realizado.');
 
-        //             $pesoTotal += $produto->peso;
 
     }
 
-        //             $contador += 1;
-        //     }
-        //         $relatorio[$key]['peso_total'] = $pesoTotal;
-        //         $relatorio[$key]['caminhao'] = $caminhao;
-        // }
+    public function gerarEntrega()
+    {
+        $teste = new GeraEntrega();
 
-        // dd($relatorio);
+        $relatorio = $teste->gerarEntrega();
 
         return view('entrega', compact('relatorio'));
     }
