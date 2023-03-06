@@ -10,7 +10,7 @@ class ClienteController extends Controller
 {
     public function listaPedidos()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::orderBy('nome')->get();
 
         return view('welcome', compact('clientes'));
     }
