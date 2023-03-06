@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Produto;
 use App\Services\GeraEntrega;
 use Illuminate\Http\Request;
 
@@ -15,19 +16,15 @@ class ClienteController extends Controller
         return view('welcome', compact('clientes'));
     }
 
-    public function gerarEntrega()
+    public function novoPedido(Cliente $cliente)
     {
-        $teste = new GeraEntrega();
-
-        $relatorio = $teste->gerarEntrega();
-
-        // $clientes = Cliente::orderBy('uf')->orderBy('nome')->get();
-        // $clientes = Cliente::whereHas('produtos', function ($p) {
-        //     $p->where('peso', '<', 300);
-        // })->orderBy('uf')->orderBy('nome')->get();
-        // $clientes_por_estado = $clientes->groupBy('uf');
-        // dd($clientes_por_estado);
-        // $keys = $clientes_por_estado->keys();
+        $produtos = Produto::orderBy('nome')->get();
+        // dd($produtos);
+        return view('criar', compact(
+            'cliente',
+            'produtos'
+        ));
+    }
 
         /** Formato de dados que preciso
          * uf: --
