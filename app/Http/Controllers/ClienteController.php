@@ -19,7 +19,7 @@ class ClienteController extends Controller
     public function novoPedido(Cliente $cliente)
     {
         $produtos = Produto::orderBy('nome')->get();
-        // dd($produtos);
+
         return view('criar', compact(
             'cliente',
             'produtos'
@@ -32,9 +32,7 @@ class ClienteController extends Controller
             'produto' => 'required|exists:produto,id'
         ]);
 
-        // dd($cliente);
-
-        // $cliente->produtos()->attach($request->produto);
+        $cliente->produtos()->attach($request->produto);
 
         return redirect()
             ->route('pedidos.lista')
