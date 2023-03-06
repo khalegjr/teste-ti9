@@ -14,5 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ClienteController::class, 'listaPedidos'])->name('lista_pedidos');
-Route::get('/gerarEntrega', [ClienteController::class, 'gerarEntrega'])->name('gerar_entrega');
+Route::get(
+    '/',
+    [ClienteController::class, 'listaPedidos'])
+->name('pedidos.lista');
+Route::group([
+        'prefix' => '/pedidos',
+        'as' => 'pedidos.',
+    ], function () {
+        Route::get(
+            '/entrega',
+            [ClienteController::class, 'gerarEntrega'])
+        ->name('gerar.entrega');
+        Route::get(
+            '/{cliente}/novo',
+            [ClienteController::class, 'novoPedido'])
+        ->name('novo');
+        Route::post(
+            '/salvar/{cliente}',
+            [ClienteController::class, 'store'])
+        ->name('salvar');
+});
