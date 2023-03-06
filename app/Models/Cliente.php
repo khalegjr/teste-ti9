@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Cliente extends Model
 {
@@ -23,7 +24,7 @@ class Cliente extends Model
      */
     public $timestamps = false;
 
-    public function produtos()
+    public function produtos(): BelongsToMany
     {
         return $this->belongsToMany(Produto::class, 'lista1');
     }
