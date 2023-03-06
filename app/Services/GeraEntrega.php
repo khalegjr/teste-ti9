@@ -3,10 +3,6 @@
 namespace App\Services;
 
 use App\Models\Cliente;
-use App\Models\Produto;
-use Illuminate\Database\Eloquent\Collection;
-use PhpParser\Node\Expr\Cast\Object_;
-use stdClass;
 
 class GeraEntrega
 {
@@ -71,7 +67,29 @@ class GeraEntrega
 
     private function montarEspecial()
     {
-        return "caminhões extras";
+        $clientes = Cliente::with([
+            'produtos' => function ($query) {
+            $query->where('peso', '>=', 300);
+        }])
+            ->get()
+            ->groupBy('uf')
+            ->map(function ($group) {
+                $this->pesoTotal = 0;
+                return [
+                    'uf' => $group->first()->uf,
+                    'caminhao' => $this->somarCaminhoes(),
+                    'clientes' => $group->map(function ($cliente) {
+                        return $this->montarCliente($cliente);
+                    })->reject(function ($cliente) {
+                        return $cliente['produtos']->isEmpty();
+                    }),
+                    'peso_total' => $this->pesoTotal
+                ];
+            })->reject(function ($group) {
+                return $group['clientes']->isEmpty();
+        })->values();
+
+        return $clientes->sortBy('uf');
     }
 
     private function somarCaminhoes(): int
