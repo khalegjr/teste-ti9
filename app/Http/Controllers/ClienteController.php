@@ -26,40 +26,23 @@ class ClienteController extends Controller
         ));
     }
 
-        /** Formato de dados que preciso
-         * uf: --
-         *  cliente: 1
-         *      produtos:
-         *          id  nome 1
-         *          id  nome 2
-         *  cliente: 2
-         *      produtos:
-         *          id  nome 1
-         */
+    public function store(Request $request, Cliente $cliente)
+    {
+        $request->validate([
+            'produto' => 'required|exists:produto,id'
+        ]);
 
-        // foreach ($keys as $key) {
-        //         $pesoTotal = 0;
-        //         $relatorio[$key]['clientes'] = [];
-        //         $contador = 0;
-        //         $caminhao += 1;
-        //     foreach ($clientes_por_estado[$key] as $cliente) {
-        //         $addProduto = [];
+        // dd($cliente);
 
-        //         $relatorio[$key]['clientes'][$contador] = [
-        //             'cliente_id' => $cliente->id,
-        //             'cliente_nome' => $cliente->nome
-        //         ];
+        // $cliente->produtos()->attach($request->produto);
 
-        //         foreach ($cliente->produtos as $produto) {
-        //             array_push($addProduto, [
-        //                 "id" => $produto->id,
-        //                 "nome" => $produto->nome,
-        //             ]);
+        return redirect()
+            ->route('pedidos.lista')
+            ->with('success', 'Pedido realizado.');
 
         //             $pesoTotal += $produto->peso;
 
-        //         }
-        //             $relatorio[$key]['clientes'][$contador]['produtos'] = $addProduto;
+    }
 
         //             $contador += 1;
         //     }
