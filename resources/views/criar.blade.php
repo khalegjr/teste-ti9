@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 md:col-span-2 md:mt-0">
+            <div class="mt-5 bg-gray-700 md:col-span-2 md:mt-0">
                 <form action="{{ route('pedidos.salvar', ['cliente' => $cliente->id]) }}" method="POST">
                     @csrf
                     @method('POST')
