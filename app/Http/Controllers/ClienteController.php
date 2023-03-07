@@ -26,7 +26,7 @@ class ClienteController extends Controller
         ));
     }
 
-    public function store(Request $request, Cliente $cliente)
+    public function salvarPedido(Request $request, Cliente $cliente)
     {
         $request->validate([
             'produto' => 'required|exists:produto,id'
