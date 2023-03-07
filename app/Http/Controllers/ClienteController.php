@@ -41,6 +41,19 @@ class ClienteController extends Controller
 
     }
 
+    public function excluirPedido(Request $request, Cliente $cliente)
+    {
+        $request->validate([
+            'produto' => 'required|exists:produto,id'
+        ]);
+
+        $cliente->produtos()->detach($request->produto);
+
+        return redirect()
+            ->route('pedidos.lista')
+            ->with('success', 'Pedido deletado.');
+    }
+
     public function gerarEntrega()
     {
         $teste = new GeraEntrega();
