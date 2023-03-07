@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get(
     '/',
-    [ClienteController::class, 'listaPedidos'])
+    [ClienteController::class, 'listaPedidos']
+    )
 ->name('pedidos.lista');
 Route::group([
         'prefix' => '/pedidos',
@@ -24,14 +25,22 @@ Route::group([
     ], function () {
         Route::get(
             '/entrega',
-            [ClienteController::class, 'gerarEntrega'])
+            [ClienteController::class, 'gerarEntrega']
+            )
         ->name('gerar.entrega');
         Route::get(
             '/{cliente}/novo',
-            [ClienteController::class, 'novoPedido'])
+            [ClienteController::class, 'novoPedido']
+            )
         ->name('novo');
         Route::post(
             '/salvar/{cliente}',
-            [ClienteController::class, 'store'])
+            [ClienteController::class, 'salvarPedido']
+            )
         ->name('salvar');
+        Route::delete(
+            '/{cliente}/excluir',
+            [ClienteController::class, 'excluirPedido']
+            )
+        ->name('excluir');
 });
