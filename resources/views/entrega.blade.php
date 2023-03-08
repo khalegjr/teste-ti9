@@ -39,7 +39,8 @@
     @foreach ($relatorio->especial as $grupo)
         <div class="my-4 overflow-hidden bg-gray-700 shadow sm:rounded-lg">
             <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-base font-semibold leading-6 text-white">Caminhão: {{ $grupo['caminhao'] }}</h3>
+                <h3 class="text-base font-semibold leading-6 text-white">Caminhão: {{ $grupo['caminhao'] }} - UF:
+                    {{ $grupo['uf'] }}</h3>
                 <p class="mt-1 max-w-2xl text-sm uppercase text-gray-200">Peso Total: {{ $grupo['peso_total'] }} KG</p>
             </div>
             @foreach ($grupo['clientes'] as $cliente)
